@@ -23,7 +23,7 @@ spec:
       containers:
       - name: spring-petclinic
         imagePullPolicy: Always
-        image: quay.io/siamaksade/spring-petclinic:latest
+        image: quay.io/siamaksade/spring-petclinic:a2bc02c9b8a8f7bc2ef107a29bcf88d161f0b85f
         livenessProbe:
           failureThreshold: 3
           httpGet:
