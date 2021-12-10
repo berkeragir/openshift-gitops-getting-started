@@ -1,0 +1,49 @@
+apiVersion: postgresql.k8s.enterprisedb.io/v1
+kind: Cluster
+metadata:
+  name: mydb1
+  namespace: gitops-demo
+spec:
+  logLevel: info
+  startDelay: 30
+  stopDelay: 30
+  nodeMaintenanceWindow:
+    inProgress: false
+    reusePVC: true
+  resources: {}
+  imageName: 'quay.io/enterprisedb/postgresql:14.1'
+  enableSuperuserAccess: true
+  affinity:
+    podAntiAffinityType: preferred
+    topologyKey: ''
+  minSyncReplicas: 0
+  postgresGID: 26
+  bootstrap:
+    initdb:
+      database: app
+      encoding: UTF8
+      localeCType: C
+      localeCollate: C
+      owner: app
+  imagePullPolicy: IfNotPresent
+  postgresql:
+    parameters:
+      log_truncate_on_rotation: 'false'
+      log_filename: postgres
+      max_replication_slots: '32'
+      log_rotation_size: '0'
+      shared_preload_libraries: ''
+      logging_collector: 'on'
+      log_directory: /controller/log
+      log_destination: csvlog
+      max_worker_processes: '32'
+      max_parallel_workers: '32'
+      log_rotation_age: '0'
+      wal_keep_size: 512MB
+  postgresUID: 26
+  maxSyncReplicas: 0
+  storage:
+    resizeInUseVolumes: true
+    size: 1Gi
+  primaryUpdateStrategy: unsupervised
+  instances: 3
