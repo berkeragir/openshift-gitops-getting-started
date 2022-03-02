@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: {{ include "gitops-demo-chart.fullname" . }}
+  name: {{ include "gitops-demo-chart.fullname" . }}
+spec:
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: {{ include "gitops-demo-chart.fullname" . }}
+    weight: 100
