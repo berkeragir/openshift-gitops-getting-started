@@ -24,7 +24,7 @@ spec:
       containers:
       - name: spring-petclinic
         imagePullPolicy: Always
-        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        image: {{ required "image.repository is mandatory!" .Values.image.repository }}:{{ .Values.image.tag }}
         livenessProbe:
           failureThreshold: 3
           httpGet:
