@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "chart.selectorLabels" . | nindent 6 }}
+        {{- include "chart.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: spring-petclinic
